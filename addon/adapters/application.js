@@ -113,8 +113,8 @@ export default Ember.Object.extend(FetchMixin, Evented, {
   findRelated(resource, url) {
     let type = resource;
     if (typeof type === 'object') {
-      resource = resource.resource;
       type = resource.type;
+      resource = resource.resource;
     }
     // use resource's service if in container, otherwise use this service to fetch
     let owner = (typeof getOwner === 'function') ? getOwner(this) : this.container;

@@ -237,7 +237,8 @@ const Resource = Ember.Object.extend({
   addRelationship(related, id) {
     let key = ['relationships', related, 'data'].join('.');
     let data = this.get(key);
-    let type = pluralize(related);
+    let meta = this.get('constructor').metaForProperty(related);
+    let type = (meta.type) ? pluralize(meta.type) : pluralize(related);
     let identifier = { type: type, id: id };
     let owner = (typeof getOwner === 'function') ? getOwner(this) : this.container;
     let resource = owner.lookup(`service:${type}`).cacheLookup(id);
